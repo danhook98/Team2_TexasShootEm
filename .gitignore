@@ -28,10 +28,10 @@
 .vs/
 
 # VS Code cache directory
-./vscode
+.vscode/
 
 # JetBrains Rider cache directory 
-./idea
+.idea/
 
 # Gradle cache directory
 .gradle/
