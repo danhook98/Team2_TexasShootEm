@@ -6,9 +6,10 @@ public class AccuracySlider : MonoBehaviour
     [SerializeField] private Slider accuracySlider;
     [SerializeField] private AnimationCurve lerpCurve;
     
+    [SerializeField] private float BaseValueChange = 0.05f;
+    
     private float _accuracyScore;
     private float _accuracySliderValue;
-    private const float BaseValueChange = 0.05f;
     private float _valueChange; 
     private float _sliderSpeed;
     private float _difficultyMultiplier = 1f;
