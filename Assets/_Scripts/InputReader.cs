@@ -4,6 +4,7 @@ using UnityEngine.Events;
 
 namespace TexasShootEm
 {
+    [CreateAssetMenu(menuName = "TexasShootEm/Input Reader", fileName = "InputReader")]
     public class InputReader : ScriptableObject, GameInput.IGameplayActions
     {
         public event UnityAction OnAimEvent;
