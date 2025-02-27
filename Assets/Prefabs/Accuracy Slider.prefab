@@ -307,7 +307,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1962186476220699932}
   - component: {fileID: 8816866920535007566}
-  - component: {fileID: 6712788968659824012}
   - component: {fileID: 7868031152362646428}
   m_Layer: 5
   m_Name: Accuracy Slider
@@ -389,27 +388,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!95 &6712788968659824012
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9216591534600088936}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 411869053e95c4f4187aa688c393e0a1, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &7868031152362646428
 MonoBehaviour:
   m_ObjectHideFlags: 0
