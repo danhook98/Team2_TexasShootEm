@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
@@ -22,7 +23,9 @@ namespace TexasShootEm
             
             EnableInput();
         }
-        
+
+        private void OnDisable() => DisableInput();
+
         public void EnableInput() => _gameInput.Gameplay.Enable();
         public void DisableInput() => _gameInput.Gameplay.Disable();
 
