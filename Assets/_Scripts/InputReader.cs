@@ -9,7 +9,7 @@ namespace TexasShootEm
     public class InputReader : ScriptableObject, GameInput.IGameplayActions
     {
         public event UnityAction OnAimEvent;
-        public event UnityAction OnDirectionalEvent;
+        public event UnityAction<Vector2> OnDirectionalEvent;
         
         private GameInput _gameInput;
         
@@ -39,7 +39,7 @@ namespace TexasShootEm
 
         public void OnDirectional(InputAction.CallbackContext context)
         {
-            OnDirectionalEvent?.Invoke();
+            OnDirectionalEvent?.Invoke(context.ReadValue<Vector2>());
         }
     }
 }
