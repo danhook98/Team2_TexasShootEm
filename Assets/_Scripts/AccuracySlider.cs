@@ -1,5 +1,5 @@
-using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class AccuracySlider : MonoBehaviour
@@ -7,7 +7,7 @@ public class AccuracySlider : MonoBehaviour
     [SerializeField] private Slider accuracySlider;
     [SerializeField] private AnimationCurve lerpCurve;
     
-    [SerializeField] private float BaseValueChange = 0.05f;
+    [SerializeField] private float baseValueChange = 0.05f;
     
     private float _accuracyScore;
     private float _accuracySliderValue;
@@ -18,7 +18,7 @@ public class AccuracySlider : MonoBehaviour
 
     private void Start()
     {
-        _valueChange = BaseValueChange * _difficultyMultiplier;
+        _valueChange = baseValueChange * _difficultyMultiplier;
         _isSliderPaused = false;
     }
     
@@ -55,7 +55,7 @@ public class AccuracySlider : MonoBehaviour
         // For Testing
         if (Input.GetKeyDown(KeyCode.T))
         {
-            _isSliderPaused = false;
+            ResetAccuracySlider();
         }
     }
 
@@ -67,7 +67,7 @@ public class AccuracySlider : MonoBehaviour
     public void SetDifficulty(float newMultiplier)
     {
         _difficultyMultiplier = newMultiplier;
-        _valueChange = BaseValueChange * _difficultyMultiplier; 
+        _valueChange = baseValueChange * _difficultyMultiplier; 
     }
 
     private void CalculateValueChange()
@@ -75,5 +75,10 @@ public class AccuracySlider : MonoBehaviour
         float pingPongValue = Mathf.PingPong(Time.time * 0.5f, accuracySlider.maxValue);
         _valueChange = lerpCurve.Evaluate(pingPongValue);
         accuracySlider.value = _valueChange;
+    }
+
+    public void ResetAccuracySlider()
+    {
+        _isSliderPaused = false;
     }
 }
