@@ -20,16 +20,33 @@ namespace TexasShootEm
             _queuedKeys = new List<Key>();
         }
 
-        private void OnEnable() => inputReader.OnAimEvent += Aim;
-        private void OnDisable() => inputReader.OnAimEvent -= Aim;
+        private void OnEnable() => inputReader.OnDirectionalEvent += KeyPress;
+        private void OnDisable() => inputReader.OnDirectionalEvent -= KeyPress;
 
-        private void Aim()
+        private void Update()
         {
-            _keyGenerator.GenerateKeys(ref _queuedKeys, numberOfKeys);
-
-            foreach (Key key in _queuedKeys)
+            // FOR TESTING ONLY.
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                Debug.Log(key);
+                RandomKeyPressGenerator.GenerateKeys(ref _queuedKeys, numberOfKeys);
+                
+                foreach (Key key in _queuedKeys)
+                {
+                    Debug.Log(key);
+                }
+            }
+        }
+
+        private void KeyPress(Vector2 input)
+        {
+            if (_queuedKeys.Count == 0) return; 
+            
+            var test = _keyGenerator.GetKeyFromDirection(input);
+
+            if (test == _queuedKeys[0])
+            {
+                Debug.Log("Valid key pressed in sequence!");
+                _queuedKeys.RemoveAt(0);
             }
         }
     }
