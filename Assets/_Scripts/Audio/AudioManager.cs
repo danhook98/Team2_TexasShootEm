@@ -30,10 +30,16 @@ namespace TexasShootEm
             }
         }
 
-        //public void PlayOneShotSFX(AudioClip clip)
-        //{
-            //sfxSource.PlayOneShot(clip);
-        //}
+        public void PlayOneShotSFX(AudioClipSO audioClip)
+        {
+            sfxSource.PlayOneShot(audioClip.clip);
+        }
+
+        public void PlayMusic(AudioClipSO audioClip)
+        {
+            musicSource.clip = audioClip.clip;
+            musicSource.Play();
+        }
 
         public void LoadVolume()
         {
