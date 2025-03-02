@@ -8,7 +8,16 @@ namespace TexasShootEm
     public class KeyPressQTE : MonoBehaviour
     {
         [SerializeField] private InputReader inputReader;
+        
+        [Header("Key Press Variables")]
         [SerializeField] private int numberOfKeys = 2;
+
+        [Header("Key Game Objects")] 
+        // REPLACE THESE WITH 'ARROW' SCRIPT OBJECTS!
+        [SerializeField] private GameObject upArrow;
+        [SerializeField] private GameObject downArrow;
+        [SerializeField] private GameObject leftArrow;
+        [SerializeField] private GameObject rightArrow;
         
         private RandomKeyPressGenerator _keyGenerator;
 
