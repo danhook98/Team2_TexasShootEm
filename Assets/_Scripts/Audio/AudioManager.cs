@@ -29,5 +29,15 @@ namespace TexasShootEm
                 musicSource = gameObject.AddComponent<AudioSource>();
             }
         }
+
+        //public void PlayOneShotSFX(AudioClip clip)
+        //{
+            //sfxSource.PlayOneShot(clip);
+        //}
+
+        public void LoadVolume()
+        {
+            
+        }
     }
 }
