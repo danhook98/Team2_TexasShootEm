@@ -39,7 +39,10 @@ namespace TexasShootEm
 
         public void OnDirectional(InputAction.CallbackContext context)
         {
-            OnDirectionalEvent?.Invoke(context.ReadValue<Vector2>());
+            if (context.action.phase == InputActionPhase.Performed)
+            {
+                OnDirectionalEvent?.Invoke(context.ReadValue<Vector2>());
+            }
         }
     }
 }
