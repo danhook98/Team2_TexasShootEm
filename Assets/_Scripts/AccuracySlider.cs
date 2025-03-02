@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class AccuracySlider : MonoBehaviour
 {
@@ -15,11 +16,19 @@ public class AccuracySlider : MonoBehaviour
     private float _sliderSpeed;
     private float _difficultyMultiplier = 1f;
     private bool _isSliderPaused;
-
+    
+    private Dictionary<string, float> scoreResults = new Dictionary<string, float>();
+    private float _perfectScoreRange = 0.9f;
+    private float _goodScoreRange = 0.6f;
+    private float _okayScoreRange = 0.3f;
+    private float _badScoreRange;
+    private float _missScoreRange;
+    
     private void Start()
     {
         _valueChange = baseValueChange * _difficultyMultiplier;
         _isSliderPaused = false;
+        AddNewScoreResults();
     }
     
     private void Update()
@@ -80,5 +89,14 @@ public class AccuracySlider : MonoBehaviour
     public void ResetAccuracySlider()
     {
         _isSliderPaused = false;
+    }
+
+    private void AddNewScoreResults()
+    {
+        scoreResults.Add("Perfect!", _perfectScoreRange);
+        scoreResults.Add("Good!", _goodScoreRange);
+        scoreResults.Add("Okay!", _okayScoreRange);
+        scoreResults.Add("Bad!", _badScoreRange);
+        scoreResults.Add("Miss!", _missScoreRange);
     }
 }
