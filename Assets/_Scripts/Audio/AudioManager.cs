@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 namespace TexasShootEm
 {
@@ -14,8 +12,12 @@ namespace TexasShootEm
         
         [Header("Audio Mixer")]
         [SerializeField] private AudioMixer audioMixer;
+        
+        [Header("Sliders")]
+        [SerializeField] private Slider musicSlider;
+        [SerializeField] private Slider sfxSlider;
 
-        private void Start()
+        private void Awake()
         {
             // If audio sources are missing, send warning messages through the console and add sources.
             if (!sfxSource)
@@ -51,38 +53,27 @@ namespace TexasShootEm
             musicSource.Stop();
         }
 
-        public void SetMusicVolume(float musicVolume)
+        public void SetVolume(float mixerVolume)
         {
             // Ensure the volume value given is valid. 
-            if (musicVolume is < 0 or > 1)
+            if (mixerVolume is < 0 or > 1)
             {
-                Debug.LogWarning("<color=red>AudioManager</color>: Attempting to set music mixer volume, but the given" +
-                                 $"value was outside the range [0, 1]: {musicVolume}.");
-                return;
-            } 
-            
-            // Update the Music mixer with the given volume value. A float value between 0.001 and 1 turns into - 60 db to
-            // 0 db in the audio mixer. The formula below grants a logarithmic change in volume, it is calculated by converting the value to a % value.
-            float volume = (Mathf.Log10(musicVolume) * 20);
-            audioMixer.SetFloat("music", volume);
-            PlayerPrefs.SetFloat("musicVolume", volume); // Save changes as PlayerPrefs.
-        }
-
-        public void SetSFXVolume(float sfxVolume)
-        {
-            // Ensure the volume value given is valid. 
-            if (sfxVolume is < 0 or > 1)
-            {
-                Debug.LogWarning("<color=red>AudioManager</color>: Attempting to set SFX mixer volume, but the given" +
-                                 $"value was outside the range [0, 1]: {sfxVolume}.");
+                Debug.LogWarning("<color=red>AudioManager</color>: Attempting to set mixer volume, but the given" +
+                                 $"value was outside the range [0, 1]: {mixerVolume}.");
                 return;
             }
+
+            if(sfxSlider.value != mixerVolume)
+            {
+                float sfxMixerVolume = (Mathf.Log10(mixerVolume) * 20);
+                audioMixer.SetFloat("SFXParameter", sfxMixerVolume);
+            }
             
-            // Update the SFX mixer with the given volume value. A float value between 0.001 and 1 turns into - 60 db to
-            // 0 db in the audio mixer. The formula below grants a logarithmic change in volume, it is calculated by converting the value to a % value.
-            float volume = (Mathf.Log10(sfxVolume) * 20);
-            audioMixer.SetFloat("SFX", volume);
-            PlayerPrefs.SetFloat("sfxVolume", volume); // Save changes as PlayerPrefs.
+            if (musicSlider.value != mixerVolume)
+            {
+                float musicMixerVolume = (Mathf.Log10(mixerVolume) * 20);
+                audioMixer.SetFloat("musicParameter", musicMixerVolume);
+            }
         }
 
         private void LoadVolume()
@@ -92,8 +83,8 @@ namespace TexasShootEm
             float musicVolume = PlayerPrefs.GetFloat("musicVolume", 1f);
             
             // Set the volume levels of the mixers.
-            audioMixer.SetFloat("SFX", sfxVolume);
-            audioMixer.SetFloat("music", musicVolume);
+            audioMixer.SetFloat("SFXParameter", sfxVolume);
+            audioMixer.SetFloat("musicParameter", musicVolume);
         }
     }
 }
