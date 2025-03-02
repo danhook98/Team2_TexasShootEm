@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -14,9 +15,11 @@ namespace TexasShootEm
             new Vector2(1f, 0f)
         };
         
-        private Vector2 GetDirectionFromKey(Key key) => DirectionAxes[(int)key];
+        public Vector2 GetDirectionFromKey(Key key) => DirectionAxes[(int)key];
+        public Key GetKeyFromDirection(Vector2 dir) => (Key) Array.FindIndex(DirectionAxes, direction 
+                                                                                                => direction == dir);
 
-        public void GenerateKeys(ref List<Key> keys, int keyCount)
+        public static void GenerateKeys(ref List<Key> keys, int keyCount)
         {
             keys.Clear();
             
