@@ -28,6 +28,8 @@ namespace TexasShootEm
                 Debug.LogWarning("No Music Audio Source assigned!");
                 musicSource = gameObject.AddComponent<AudioSource>();
             }
+
+            LoadVolume();
         }
 
         public void PlayOneShotSFX(AudioClipSO audioClip)
@@ -39,6 +41,21 @@ namespace TexasShootEm
         {
             musicSource.clip = audioClip.clip;
             musicSource.Play();
+        }
+
+        public void StopMusic()
+        {
+            musicSource.Stop();
+        }
+
+        public void SetMusicVolume(float volume)
+        {
+            
+        }
+
+        public void SetSFXVolume(float volume)
+        {
+            
         }
 
         public void LoadVolume()
