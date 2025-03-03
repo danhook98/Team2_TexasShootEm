@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.UI;
 
 namespace TexasShootEm
 {
@@ -13,10 +12,6 @@ namespace TexasShootEm
         [Header("Audio Mixer")]
         [SerializeField] private AudioMixer audioMixer;
         
-        [Header("Sliders")]
-        [SerializeField] private Slider musicSlider;
-        [SerializeField] private Slider sfxSlider;
-
         private void Awake()
         {
             // If audio sources are missing, send warning messages through the console and add sources.
@@ -52,28 +47,22 @@ namespace TexasShootEm
         {
             musicSource.Stop();
         }
+        
+        public void SetSfxVolume(float value) => SetVolume(value, "SFXParameter");
+        public void SetMusicVolume(float value) => SetVolume(value, "musicParameter");
 
-        public void SetVolume(float mixerVolume)
+        public void SetVolume(float volume, string mixerGroup)
         {
             // Ensure the volume value given is valid. 
-            if (mixerVolume is < 0 or > 1)
+            if (volume is < 0 or > 1)
             {
                 Debug.LogWarning("<color=red>AudioManager</color>: Attempting to set mixer volume, but the given" +
-                                 $"value was outside the range [0, 1]: {mixerVolume}.");
+                                 $"value was outside the range [0, 1]: {volume}.");
                 return;
             }
-
-            if(sfxSlider.value != mixerVolume)
-            {
-                float sfxMixerVolume = (Mathf.Log10(mixerVolume) * 20);
-                audioMixer.SetFloat("SFXParameter", sfxMixerVolume);
-            }
             
-            if (musicSlider.value != mixerVolume)
-            {
-                float musicMixerVolume = (Mathf.Log10(mixerVolume) * 20);
-                audioMixer.SetFloat("musicParameter", musicMixerVolume);
-            }
+            float mixerVolume = (Mathf.Log10(volume) * 20);
+            audioMixer.SetFloat(mixerGroup, mixerVolume);
         }
 
         private void LoadVolume()
