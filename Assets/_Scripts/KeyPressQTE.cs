@@ -52,7 +52,8 @@ namespace TexasShootEm
             {
                 Debug.Log("Valid key pressed in sequence!");
                 _queuedKeys.RemoveAt(0);
-                Destroy(_arrowObjects[0]);
+                Destroy(_arrowObjects[0].gameObject);
+                _arrowObjects.RemoveAt(0);
             }
         }
 
