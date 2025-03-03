@@ -16,12 +16,18 @@ namespace TexasShootEm
         private RandomKeyPressGenerator _keyGenerator;
         private List<Key> _queuedKeys;
         private List<Arrow> _arrowObjects;
+        
+        private Camera _mainCamera;
+        private Vector2 _startPosition;
 
         private void Awake()
         {
             _keyGenerator = new RandomKeyPressGenerator();
             _queuedKeys = new List<Key>();
             _arrowObjects = new List<Arrow>();
+            
+            _mainCamera = Camera.main;
+            _startPosition = _mainCamera.ViewportToWorldPoint(new Vector3(1.25f, 0.5f, 0f));
         }
 
         private void OnEnable() => inputReader.OnDirectionalEvent += KeyPress;
@@ -40,12 +46,13 @@ namespace TexasShootEm
         {
             if (_queuedKeys.Count == 0) return; 
             
-            var test = _keyGenerator.GetKeyFromDirection(input);
+            var key = _keyGenerator.GetKeyFromDirection(input);
 
-            if (test == _queuedKeys[0])
+            if (key == _queuedKeys[0])
             {
                 Debug.Log("Valid key pressed in sequence!");
                 _queuedKeys.RemoveAt(0);
+                Destroy(_arrowObjects[0]);
             }
         }
 
@@ -67,7 +74,7 @@ namespace TexasShootEm
 
             for (int i = 0; i < arrowsToSpawn; i++)
             {
-                Vector3 pos = Vector2.zero + (Vector2.right * i);
+                Vector3 pos = _startPosition + (Vector2.right * i);
                 Arrow arrow = Instantiate(arrowPrefab, transform);
                 arrow.SetPosition(pos);
                 _arrowObjects.Add(arrow);
