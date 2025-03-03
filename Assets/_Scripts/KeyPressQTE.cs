@@ -9,8 +9,9 @@ namespace TexasShootEm
         
         [Header("Key Press Variables")]
         [SerializeField] private int numberOfKeysToPress = 2;
+        [SerializeField] private Vector2 spawnPosition = new Vector2(1.25f, 0.25f);
 
-        [Header("Key Game Objects")] 
+        [Header("Key Game Object")] 
         [SerializeField] private Arrow arrowPrefab;
         
         private RandomKeyPressGenerator _keyGenerator;
@@ -27,7 +28,7 @@ namespace TexasShootEm
             _arrowObjects = new List<Arrow>();
             
             _mainCamera = Camera.main;
-            _startPosition = _mainCamera.ViewportToWorldPoint(new Vector3(1.25f, 0.5f, 0f));
+            _startPosition = _mainCamera.ViewportToWorldPoint(spawnPosition);
         }
 
         private void OnEnable() => inputReader.OnDirectionalEvent += KeyPress;

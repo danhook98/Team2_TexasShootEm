@@ -45,8 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputReader: {fileID: 11400000, guid: 1fca4445773370446a46be614455a663, type: 2}
-  numberOfKeys: 2
-  upArrow: {fileID: 0}
-  downArrow: {fileID: 0}
-  leftArrow: {fileID: 0}
-  rightArrow: {fileID: 0}
+  numberOfKeysToPress: 4
+  spawnPosition: {x: 1.25, y: 0.25}
+  arrowPrefab: {fileID: 4690316655991681865, guid: f13e8785fe703b1478678e77407b1392, type: 3}
